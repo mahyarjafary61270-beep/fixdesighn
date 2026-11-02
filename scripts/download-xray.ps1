@@ -11,6 +11,14 @@ $temp = Join-Path ([IO.Path]::GetTempPath()) ("mahyar-xray-" + [guid]::NewGuid()
 New-Item -ItemType Directory -Force $temp | Out-Null
 try {
     $headers = @{ "User-Agent" = "Mahyar-VPN-build"; "Accept" = "application/vnd.github+json" }
+    $token = $env:GITHUB_TOKEN
+    if ([string]::IsNullOrWhiteSpace($token)) { $token = $env:GH_TOKEN }
+    if (-not [string]::IsNullOrWhiteSpace($token)) {
+        $headers["Authorization"] = "Bearer $token"
+        Write-Host "Using an Actions-provided token for GitHub release metadata."
+    } else {
+        Write-Warning "No GitHub token found; anonymous API rate limits may apply."
+    }
     $release = Invoke-RestMethod -Uri $api -Headers $headers
     $asset = @($release.assets | Where-Object { $_.name -eq $name -and $_.state -eq 'uploaded' })
     if ($asset.Count -ne 1 -or $asset[0].digest -notmatch '^sha256:([a-fA-F0-9]{64})$') {
