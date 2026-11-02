@@ -1,0 +1,45 @@
+name: Mahyar VPN Windows build
+on:
+  workflow_dispatch:
+  push:
+    tags: ['v*']
+permissions:
+  contents: read
+jobs:
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Download and verify official Xray
+        shell: pwsh
+        run: ./scripts/download-xray.ps1
+      - name: Check Xray runs
+        shell: pwsh
+        run: |
+          & ./resources/core/xray.exe version
+          if ($LASTEXITCODE -ne 0) { throw "Xray could not run" }
+      - name: Test source
+        run: node --test
+      - name: Validate the real Xray profile and geodata
+        run: node scripts/smoke-xray.js
+      - name: Install dependencies
+        run: npm install --no-package-lock
+      - name: Build Windows installer and portable ZIP
+        run: npm run dist
+      - name: Hash distributables
+        shell: pwsh
+        run: |
+          $items = @(Get-ChildItem dist -File | Where-Object { $_.Name -match '\.(exe|zip)$' })
+          if ($items.Count -lt 2) { throw "Expected installer and portable archive" }
+          $items | Get-FileHash -Algorithm SHA256 | ForEach-Object { "$($_.Hash.ToLower())  $([IO.Path]::GetFileName($_.Path))" } | Set-Content -Encoding ascii dist/SHA256SUMS.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Mahyar-VPN-windows-x64
+          path: |
+            dist/*.exe
+            dist/*.zip
+            dist/SHA256SUMS.txt
+          if-no-files-found: error
