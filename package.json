@@ -1,0 +1,64 @@
+{
+  "name": "mahyar-vpn",
+  "productName": "Mahyar VPN",
+  "version": "1.0.0",
+  "description": "Domain-fronting VPN for Windows — dark glass UI, no server needed",
+  "main": "src/main/main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "node --test",
+    "core:download": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/download-xray.ps1",
+    "dist": "electron-builder --win nsis zip --publish never",
+    "dist:dir": "electron-builder --dir --publish never"
+  },
+  "author": "Mahyar",
+  "license": "MPL-2.0",
+  "engines": {
+    "node": ">=18",
+    "electron": ">=28"
+  },
+  "devDependencies": {
+    "electron": "^33.2.0",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "com.mahyar.vpn",
+    "productName": "Mahyar VPN",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "src/**/*",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "resources/core",
+        "to": "core"
+      }
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": ["x64"]
+        },
+        {
+          "target": "zip",
+          "arch": ["x64"]
+        }
+      ],
+      "icon": "build/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "perMachine": false,
+      "installerIcon": "build/icon.ico",
+      "uninstallerIcon": "build/icon.ico",
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Mahyar VPN"
+    }
+  }
+}

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'">
+  <title>Mahyar VPN</title>
+  <link rel="stylesheet" href="neon.css">
+</head>
+<body>
+  <div class="ambient" aria-hidden="true">
+    <div class="ambient-glow glow-top"></div>
+    <div class="ambient-glow glow-bottom"></div>
+    <div class="ambient-grain"></div>
+  </div>
+
+  <header class="titlebar">
+    <div class="brand" aria-label="MAHYAR VPN">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 40 40"><path d="M20 4 33 11.5v14L20 33 7 25.5v-14L20 4Z"/><path d="M20 11v10m-5-6a7 7 0 1 0 10 0"/></svg>
+      </span>
+      <div class="brand-copy"><strong dir="ltr">MAHYAR <span>VPN</span></strong><small>اتصال امن، با کنترل خودت</small></div>
+    </div>
+    <div class="window-actions" dir="ltr">
+      <button id="btn-min" class="window-btn" title="کمینه‌سازی" aria-label="کمینه‌سازی"><svg viewBox="0 0 16 16"><path d="M3 8h10"/></svg></button>
+      <button id="btn-max" class="window-btn" title="بزرگ یا کوچک کردن پنجره" aria-label="بزرگ یا کوچک کردن پنجره"><svg viewBox="0 0 16 16"><rect x="3.5" y="3.5" width="9" height="9" rx="1"/></svg></button>
+      <button id="btn-hide" class="window-btn close" title="انتقال به کنار ساعت" aria-label="انتقال به کنار ساعت"><svg viewBox="0 0 16 16"><path d="M4 4l8 8M12 4l-8 8"/></svg></button>
+    </div>
+  </header>
+
+  <main class="workspace">
+    <section class="intro">
+      <div class="overline"><span class="overline-line"></span><span>PRIVATE CONNECTION / WINDOWS</span><span class="overline-line"></span></div>
+      <h1>اتصال، <em>در کنترل تو.</em></h1>
+      <p>وضعیت هسته و پروکسی محلی را از همین‌جا مدیریت کن.</p>
+    </section>
+
+    <div class="dashboard">
+      <section class="hero glass" aria-labelledby="st-head">
+        <div class="hero-top">
+          <div class="section-kicker" dir="ltr"><span class="live-mark"></span> CONNECTION STATUS</div>
+          <div class="hero-meta">
+            <div class="meta-chip hidden" id="chip-uptime"></div>
+            <div class="meta-chip green hidden" id="chip-live"><span class="tiny-live"></span> پروکسی محلی فعال</div>
+          </div>
+        </div>
+
+        <div class="hero-core">
+          <div class="power-wrap" id="power-wrap">
+            <div class="orbit orbit-outer" aria-hidden="true"><i></i></div>
+            <div class="orbit orbit-middle" aria-hidden="true"><i></i></div>
+            <div class="orbit orbit-inner" aria-hidden="true"></div>
+            <div class="energy energy-a" aria-hidden="true"></div>
+            <div class="energy energy-b" aria-hidden="true"></div>
+            <button id="btn-power" class="power" aria-label="اتصال یا قطع اتصال">
+              <svg class="power-icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 4v11M9 8.8a11 11 0 1 0 14 0"/></svg>
+              <span id="power-label" dir="ltr">CONNECT</span>
+            </button>
+          </div>
+          <div class="hero-text">
+            <div class="status-label"><span class="status-dot"></span> وضعیت اتصال</div>
+            <h2 id="st-head">آماده اتصال</h2>
+            <p id="st-sub">اول گواهی محلی را بسازید و سپس با تأیید خودتان نصب کنید.</p>
+          </div>
+        </div>
+
+        <div class="hero-bottom">
+          <span class="hero-bottom-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M8 2 14 13H2L8 2Z"/><path d="M8 6v3m0 2v.1"/></svg></span>
+          <span>پروکسی محلی فعال است؛ دسترسی به سایت‌ها را تضمین نمی‌کند.</span>
+          <span class="hero-bottom-line"></span>
+        </div>
+      </section>
+
+      <div class="side-stack">
+        <section class="card glass setup-card" aria-labelledby="setup-heading">
+          <div class="card-head">
+            <div class="card-title-wrap">
+              <span class="card-icon shield-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3 19 6v5c0 4.6-3 8-7 10-4-2-7-5.4-7-10V6l7-3Z"/><path d="m9 12 2 2 4-4"/></svg></span>
+              <div><div class="section-kicker" dir="ltr">GET STARTED</div><h2 id="setup-heading">راه‌اندازی امن</h2></div>
+            </div>
+            <span class="pill" id="pill-setup">در انتظار</span>
+          </div>
+          <div class="step" id="step-mint"><span class="step-dot" data-state="idle">۱</span><div class="step-body"><div class="step-title">ساخت گواهی محلی</div><div class="step-desc">کلید خصوصی فقط برای همین دستگاه ساخته می‌شود.</div></div><button class="btn sm" data-act="setup">ساخت</button></div>
+          <div class="step" id="step-trust"><span class="step-dot" data-state="idle">۲</span><div class="step-body"><div class="step-title">نصب گواهی در ویندوز</div><div class="step-desc">فقط در صورت اعتماد، پنجرهٔ ویندوز را تأیید کنید.</div></div><button class="btn sm" data-act="trust">نصب</button></div>
+          <p class="security-note"><span class="note-icon">!</span><span>اعتماد به CA محلی، امکان بررسی ترافیک رمزگذاری‌شده را به صاحب کلید می‌دهد.</span></p>
+          <div class="cert-error hidden" id="cert-error" role="alert"><strong>نصب گواهی کامل نشد</strong><pre id="cert-error-detail"></pre><button class="btn sm ghost" id="cert-error-close">بستن جزئیات</button></div>
+        </section>
+
+        <section class="card glass traffic-card" aria-labelledby="traffic-heading">
+          <div class="card-head compact">
+            <div class="card-title-wrap">
+              <span class="card-icon traffic-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 19V5m-5 5 5-5 5 5M5 15l7 7 7-7"/></svg></span>
+              <div><div class="section-kicker" dir="ltr">LIVE TRAFFIC</div><h2 id="traffic-heading">ترافیک واقعی</h2></div>
+            </div>
+            <span class="pill" id="pill-traffic">—</span>
+          </div>
+          <div class="traffic">
+            <div class="t-item down-card"><div class="t-label down"><span class="arrow" aria-hidden="true">↓</span> دانلود</div><div class="t-speed" id="spd-down">۰ <small>KB/s</small></div><div class="t-total" id="tot-down">مجموع: ۰</div><div class="meter" aria-hidden="true"><i></i></div></div>
+            <div class="t-item up-card"><div class="t-label up"><span class="arrow" aria-hidden="true">↑</span> آپلود</div><div class="t-speed" id="spd-up">۰ <small>KB/s</small></div><div class="t-total" id="tot-up">مجموع: ۰</div><div class="meter" aria-hidden="true"><i></i></div></div>
+          </div>
+          <p class="traffic-note">آمار فقط هنگام اتصال و در صورت دریافت از هسته نمایش داده می‌شود.</p>
+        </section>
+      </div>
+
+      <section class="card glass cert-card" aria-labelledby="cert-heading">
+        <div class="card-head compact">
+          <div class="card-title-wrap"><span class="card-icon identity-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M5 20c.8-3.4 3-5 7-5s6.2 1.6 7 5m-4-7 1.5 1.5L20 11"/></svg></span><div><div class="section-kicker" dir="ltr">LOCAL IDENTITY</div><h2 id="cert-heading">گواهی دستگاه</h2></div></div>
+          <span class="pill" id="pill-cert">—</span>
+        </div>
+        <div class="kv"><span class="k">نام</span><span class="v" id="cert-cn">—</span><span class="k">اعتبار تا</span><span class="v" id="cert-exp">—</span><span class="k">اثر انگشت</span><span class="v mono" id="cert-sha">—</span></div>
+        <div class="row-btns"><button class="btn sm danger-ghost" data-act="remove"><span class="button-icon" aria-hidden="true">×</span> حذف گواهی</button><button class="btn sm ghost" data-act="openfile"><span class="button-icon folder-icon" aria-hidden="true">↗</span> پوشهٔ گواهی</button></div>
+      </section>
+
+      <section class="card glass log-card" aria-labelledby="log-heading">
+        <div class="card-head compact">
+          <div class="card-title-wrap"><span class="card-icon log-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 5h14M5 10h14M5 15h9M5 20h6"/><circle cx="19" cy="18" r="2"/></svg></span><div><div class="section-kicker" dir="ltr">SYSTEM LOG</div><h2 id="log-heading">گزارش سیستم</h2></div></div>
+          <button class="btn sm ghost" id="btn-log-toggle" aria-expanded="false" aria-controls="log">نمایش</button>
+        </div>
+        <p class="log-caption">پیام‌های هسته و خطاها؛ بدون ادعای اتصال اینترنت.</p>
+        <div class="log hidden" id="log" dir="ltr"></div>
+      </section>
+    </div>
+
+    <footer class="foot"><span><i class="footer-dot"></i> فقط برنامه‌هایی که از پروکسی ویندوز استفاده می‌کنند.</span><span dir="ltr">MITM-DOMAINFRONTING / @PATTERNIHA</span></footer>
+  </main>
+  <div class="toast hidden" id="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
